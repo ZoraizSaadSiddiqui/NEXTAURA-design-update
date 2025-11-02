@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-// import Button from "../ui/buttons";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -15,8 +15,6 @@ import {
 import Button from "../ui/buttons";
 import {
   FadeIn,
-  SlideInLeft,
-  SlideInRight,
   StaggerContainer,
   StaggerItem,
   HoverLift,
@@ -29,13 +27,10 @@ const Services = () => {
       title: "Web Development",
       description:
         "Custom websites and web applications built with modern technologies like React, Next.js, and Node.js.",
-      features: [
-        "Responsive Design",
-        "Progressive Web Apps",
-        "E-commerce Solutions",
-      ],
-      color: "blue",
+      features: ["Responsive Design", "Progressive Web Apps", "E-commerce Solutions"],
+      color: "#3B82F6", // blue
       href: "/components/webdevelopment",
+      image: "/assets/webdev.jpg",
     },
     {
       icon: Smartphone,
@@ -43,8 +38,9 @@ const Services = () => {
       description:
         "Native and cross-platform mobile applications for iOS and Android with seamless user experiences.",
       features: ["React Native", "Flutter", "App Store Deployment"],
-      color: "green",
+      color: "#10B981", // green
       href: "/services/app-development",
+      image: "/assets/mbl.jpg",
     },
     {
       icon: Palette,
@@ -52,8 +48,9 @@ const Services = () => {
       description:
         "User-centered design that creates engaging, intuitive, and beautiful digital experiences.",
       features: ["User Research", "Wireframing", "Prototyping"],
-      color: "purple",
+      color: "#A855F7", // purple
       href: "/services/ui-ux-design",
+      image: "/assets/ui.jpg",
     },
     {
       icon: TrendingUp,
@@ -61,8 +58,9 @@ const Services = () => {
       description:
         "Data-driven marketing strategies to grow your online presence and drive business growth.",
       features: ["SEO", "Social Media", "Content Strategy"],
-      color: "orange",
+      color: "#F59E0B", // orange
       href: "/services/digital-marketing",
+      image: "/assets/digital.jpg",
     },
     {
       icon: Cloud,
@@ -70,8 +68,9 @@ const Services = () => {
       description:
         "Scalable software-as-a-service solutions with cloud architecture and subscription models.",
       features: ["Cloud Architecture", "API Integration", "Security"],
-      color: "indigo",
+      color: "#6366F1", // indigo
       href: "/services/saas-development",
+      image: "/assets/saas.jpg",
     },
     {
       icon: Search,
@@ -79,8 +78,9 @@ const Services = () => {
       description:
         "Improve your search engine rankings and drive organic traffic with proven SEO strategies.",
       features: ["Keyword Research", "Technical SEO", "Analytics"],
-      color: "red",
+      color: "#EF4444", // red
       href: "/services/seo-optimization",
+      image: "/assets/seo.jpg",
     },
     {
       icon: BarChart3,
@@ -88,41 +88,25 @@ const Services = () => {
       description:
         "Interactive dashboards for data visualization, business intelligence, and real-time analytics.",
       features: ["Data Visualization", "Real-time Updates", "Custom Metrics"],
-      color: "teal",
+      color: "#0EA5E9", // cyan
       href: "/services/dashboard-development",
+      image: "/assets/dashboard.jpg",
     },
     {
       icon: Database,
       title: "Health Dashboards",
       description:
         "Specialized health monitoring dashboards with HIPAA compliance and real-time data tracking.",
-      features: [
-        "HIPAA Compliant",
-        "Real-time Monitoring",
-        "Patient Analytics",
-      ],
-      color: "pink",
+      features: ["HIPAA Compliant", "Real-time Monitoring", "Patient Analytics"],
+      color: "#EC4899", // pink
       href: "/services/health-dashboards",
+      image: "/assets/health.jpg",
     },
   ];
 
-  const colorMap = {
-    blue: "from-blue-500 to-blue-600",
-    green: "from-green-500 to-green-600",
-    purple: "from-purple-500 to-purple-600",
-    orange: "from-orange-500 to-orange-600",
-    indigo: "from-indigo-500 to-indigo-600",
-    red: "from-red-500 to-red-600",
-    teal: "from-teal-500 to-teal-600",
-    pink: "from-pink-500 to-pink-600",
-  };
-
   return (
-    <section
-      id="services"
-      className="relative py-20 bg-blue-900 mt-20 overflow-hidden"
-    >
-      {/* Dotted Background */}
+    <section id="services" className="relative py-20 bg-blue-900 mt-20 overflow-hidden">
+      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div
           className="absolute inset-0"
@@ -130,7 +114,7 @@ const Services = () => {
             backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
             backgroundSize: "50px 50px",
           }}
-        ></div>
+        />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
@@ -152,86 +136,110 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              Comprehensive digital solutions to transform your business and
-              drive growth in the modern landscape.
+              Comprehensive digital solutions to transform your business and drive growth.
             </motion.p>
           </div>
         </FadeIn>
 
         {/* Services Grid */}
         <StaggerContainer>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <StaggerItem key={service.title}>
-                <HoverLift>
-                  <motion.div
-                    whileHover={{ y: -8 }}
-                    className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden group"
-                  >
-                    <div
-                      className={`bg-gradient-to-r ${
-                        colorMap[service.color]
-                      } p-6 text-white relative overflow-hidden`}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <StaggerItem key={service.title}>
+                  <HoverLift>
+                    <motion.div
+                      whileHover={{ y: -5, scale: 1.03 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-white rounded-2xl shadow-2xl hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] flex flex-col h-[410px] overflow-hidden group transition-all duration-300"
                     >
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
-                      <service.icon size={48} className="relative z-10" />
-                      <div className="absolute -right-8 -bottom-8 w-24 h-24 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
-                    </div>
+                      {/* Image */}
+                      {service.image && (
+                        <div className="relative w-full h-[45%]">
+                          <Image
+                            src={service.image}
+                            alt={service.title}
+                            fill
+                            className="object-cover rounded-t-2xl"
+                          />
+                        </div>
+                      )}
 
-                    {/* Content */}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors duration-300">
-                        {service.title}
-                      </h3>
-
-                      <p className="text-gray-600 mb-4 leading-relaxed">
-                        {service.description}
-                      </p>
-
-                      {/* Features */}
-                      <ul className="space-y-2 mb-6">
-                        {service.features.map((feature, featureIndex) => (
-                          <motion.li
-                            key={feature}
-                            className="flex items-center text-sm text-gray-500"
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 * featureIndex }}
+                      {/* Content */}
+                      <div className="p-4 flex flex-col flex-1">
+                        {/* Icon + Title */}
+                        <div className="flex items-center mb-3 space-x-3 mt-1">
+                          <motion.div
+                            whileHover={{ scale: 1.15 }}
+                            transition={{ type: "spring", stiffness: 200 }}
+                            className="flex items-center justify-center"
                           >
-                            <div
-                              className={`w-2 h-2 bg-gradient-to-r ${
-                                colorMap[service.color]
-                              } rounded-full mr-3`}
-                            ></div>
-                            {feature}
-                          </motion.li>
-                        ))}
-                      </ul>
+                            <Icon
+                              size={38}
+                              style={{ color: service.color }}
+                              className="drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]"
+                            />
+                          </motion.div>
+                          <h3 className="text-[18px] font-bold text-black">{service.title}</h3>
+                        </div>
 
-                      {/* Learn More Link */}
-                      <Link
-                        href={service.href}
-                        className={`inline-flex items-center text-sm font-semibold bg-gradient-to-r ${
-                          colorMap[service.color]
-                        } bg-clip-text text-transparent hover:opacity-80 transition-opacity duration-300 group/link`}
-                      >
-                        Learn More
-                        <motion.span className="ml-1 group-hover/link:translate-x-1 transition-transform duration-300">
-                          →
-                        </motion.span>
-                      </Link>
-                    </div>
-                  </motion.div>
-                </HoverLift>
-              </StaggerItem>
-            ))}
+                        {/* Description */}
+                        <p className="text-gray-600 text-sm mb-2 leading-snug">
+                          {service.description}
+                        </p>
+
+                        {/* Features */}
+                        <ul className="space-y-1 mb-2">
+                          {service.features.map((feature, i) => (
+                            <motion.li
+                              key={i}
+                              custom={i}
+                              variants={{
+                                hidden: { opacity: 0, x: -20 },
+                                visible: (i) => ({
+                                  opacity: 1,
+                                  x: 0,
+                                  transition: { delay: i * 0.1, duration: 0.25 },
+                                }),
+                              }}
+                              initial="hidden"
+                              whileInView="visible"
+                              viewport={{ once: true }}
+                              className="flex items-center text-sm text-gray-500"
+                            >
+                              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2" />
+                              {feature}
+                            </motion.li>
+                          ))}
+                        </ul>
+
+                        {/* Learn More */}
+                        <Link
+                          href={service.href}
+                          className="inline-flex items-center text-sm font-semibold text-gray-800 transition-colors duration-300 mt-2 hover:text-gray-600"
+                        >
+                          Learn More
+                          <motion.span
+                            className="ml-1"
+                            whileHover={{ x: 3 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            →
+                          </motion.span>
+                        </Link>
+                      </div>
+                    </motion.div>
+                  </HoverLift>
+                </StaggerItem>
+              );
+            })}
           </div>
         </StaggerContainer>
 
         {/* CTA */}
         <FadeIn delay={0.6}>
-          <div className="text-center mt-16 flex justify-center items-center">
+          <div className="text-center mt-16">
             <Button href="/contact" variant="outline" size="lg">
               Get In Touch
             </Button>
